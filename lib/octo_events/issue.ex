@@ -9,6 +9,8 @@ defmodule OctoEvents.Issue do
     field :state, :string
     field :title, :string
 
+    has_many :events, {"issue_events", Event}, foreign_key: :transactionable_id
+
     timestamps()
   end
 
