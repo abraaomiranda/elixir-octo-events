@@ -43,7 +43,8 @@ defmodule OctoEvents.MixProject do
       {:plug_cowboy, "~> 2.0"},
 
       # Dev/test
-      {:credo, "~> 1.2", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.2", only: [:dev, :test], runtime: false},
+      {:ex_machina, "~> 2.3", only: :test}
     ]
   end
 
