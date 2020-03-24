@@ -37,28 +37,28 @@ defmodule OctoEvents.CreateIssueTest do
 
     test "returns error when html_url is missing" do
       params = %{
-        "html_url" => "https://github.com/octo_events/",
-        "number" => nil,
+        "html_url" => "",
+        "number" => 1,
         "title" => "An incredible title",
         "state" => "open",
         "body" => "A summer body"
       }
 
       assert {:error, %Ecto.Changeset{} = changeset} = CreateIssue.run(params)
-      %{number: ["can't be blank"]} = errors_on(changeset)
+      %{html_url: ["can't be blank"]} = errors_on(changeset)
     end
 
     test "returns error when state is missing" do
       params = %{
         "html_url" => "https://github.com/octo_events/",
-        "number" => nil,
+        "number" => 1,
         "title" => "An incredible title",
-        "state" => "open",
+        "state" => "",
         "body" => "A summer body"
       }
 
       assert {:error, %Ecto.Changeset{} = changeset} = CreateIssue.run(params)
-      %{number: ["can't be blank"]} = errors_on(changeset)
+      %{state: ["can't be blank"]} = errors_on(changeset)
     end
   end
 end
