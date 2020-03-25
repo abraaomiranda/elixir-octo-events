@@ -16,7 +16,8 @@ defmodule OctoEventsWeb.EventControllerTest do
         }
       }
 
-      conn = conn
+      conn =
+        conn
         |> put_req_header("http_x_github_event", "issue")
         |> post(path, params)
 
@@ -31,7 +32,8 @@ defmodule OctoEventsWeb.EventControllerTest do
         }
       }
 
-      conn = conn
+      conn =
+        conn
         |> put_req_header("http_x_github_event", "ping")
         |> post(path, params)
 
@@ -40,11 +42,11 @@ defmodule OctoEventsWeb.EventControllerTest do
 
     test "return 422 when params are invalid", %{conn: conn, path: path} do
       params = %{
-        "payload" => %{
-        }
+        "payload" => %{}
       }
 
-      conn = conn
+      conn =
+        conn
         |> put_req_header("http_x_github_event", "issue")
         |> post(path, params)
 
@@ -59,7 +61,8 @@ defmodule OctoEventsWeb.EventControllerTest do
         }
       }
 
-      conn = conn
+      conn =
+        conn
         |> put_req_header("http_x_github_event", "unexistent type")
         |> post(path, params)
 

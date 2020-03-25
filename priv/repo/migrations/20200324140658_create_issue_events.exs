@@ -8,6 +8,5 @@ defmodule OctoEvents.Repo.Migrations.CreateIssueEvents do
 
       timestamps()
     end
-
   end
 end

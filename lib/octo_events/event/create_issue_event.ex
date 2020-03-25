@@ -11,6 +11,7 @@ defmodule OctoEvents.CreateIssueEvent do
     case create_or_update_issue(issue_attributes) do
       {:ok, issue} ->
         create_event(issue, event_attributes)
+
       {:error, changeset} ->
         {:error, changeset}
     end
@@ -21,13 +22,14 @@ defmodule OctoEvents.CreateIssueEvent do
     |> Ecto.build_assoc(:events)
     |> cast(event_attributes, [:action])
     |> validate_required([:action, :transactionable_id])
-    |> Repo.insert
+    |> Repo.insert()
   end
 
   defp create_or_update_issue(%{"number" => number} = issue_attributes) do
     case IssueRepo.get_by_number(number) do
       %Issue{} = issue ->
         UpdateIssue.run(issue, issue_attributes)
+
       nil ->
         CreateIssue.run(issue_attributes)
     end

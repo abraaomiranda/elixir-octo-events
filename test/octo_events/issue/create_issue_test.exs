@@ -4,7 +4,6 @@ defmodule OctoEvents.CreateIssueTest do
   alias OctoEvents.{CreateIssue, Issue}
 
   describe "run/1" do
-
     test "returns struct when the params are valid" do
       params = %{
         "html_url" => "https://github.com/octo_events/",

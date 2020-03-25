@@ -11,6 +11,6 @@ defmodule OctoEvents.UpdateIssue do
     issue
     |> cast(attrs, [:html_url, :title, :state, :body])
     |> validate_required([:html_url, :state])
-    |> Repo.update
+    |> Repo.update()
   end
 end

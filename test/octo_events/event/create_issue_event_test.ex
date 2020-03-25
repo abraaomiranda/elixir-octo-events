@@ -6,7 +6,6 @@ defmodule OctoEvents.CreateIssueEventTest do
   import OctoEvents.Factory
 
   describe "run/1" do
-
     test "returns struct when the params are valid" do
       event_params = %{"action" => "open"}
       issue_params = string_params_for(:issue)
@@ -19,7 +18,9 @@ defmodule OctoEvents.CreateIssueEventTest do
       event_params = %{"action" => ""}
       issue_params = string_params_for(:issue)
 
-      assert {:error, %Ecto.Changeset{} = changeset} = CreateIssueEvent.run(issue_params, event_params)
+      assert {:error, %Ecto.Changeset{} = changeset} =
+               CreateIssueEvent.run(issue_params, event_params)
+
       %{action: ["can't be blank"]} = errors_on(changeset)
     end
 
@@ -27,7 +28,9 @@ defmodule OctoEvents.CreateIssueEventTest do
       event_params = %{"action" => "open"}
       issue_params = string_params_for(:issue, state: "")
 
-      assert {:error, %Ecto.Changeset{} = changeset} = CreateIssueEvent.run(issue_params, event_params)
+      assert {:error, %Ecto.Changeset{} = changeset} =
+               CreateIssueEvent.run(issue_params, event_params)
+
       %{state: ["can't be blank"]} = errors_on(changeset)
     end
 
@@ -36,7 +39,9 @@ defmodule OctoEvents.CreateIssueEventTest do
       event_params = %{"action" => "open"}
       issue_params = string_params_for(:issue, number: saved_issue.number, state: "")
 
-      assert {:error, %Ecto.Changeset{} = changeset} = CreateIssueEvent.run(issue_params, event_params)
+      assert {:error, %Ecto.Changeset{} = changeset} =
+               CreateIssueEvent.run(issue_params, event_params)
+
       %{state: ["can't be blank"]} = errors_on(changeset)
     end
   end

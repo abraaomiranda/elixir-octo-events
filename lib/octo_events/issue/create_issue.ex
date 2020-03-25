@@ -11,6 +11,6 @@ defmodule OctoEvents.CreateIssue do
     %Issue{}
     |> cast(attrs, [:html_url, :number, :title, :state, :body])
     |> validate_required([:html_url, :number, :state])
-    |> Repo.insert
+    |> Repo.insert()
   end
 end

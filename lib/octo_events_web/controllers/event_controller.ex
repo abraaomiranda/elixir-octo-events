@@ -19,6 +19,6 @@ defmodule OctoEventsWeb.EventController do
         conn
         |> put_status(:unprocessable_entity)
         |> json(%{status: "unprocessable entity"})
-      end
+    end
   end
 end

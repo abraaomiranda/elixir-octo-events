@@ -12,5 +12,4 @@ defmodule OctoEvents.Issue do
 
     timestamps()
   end
-
 end

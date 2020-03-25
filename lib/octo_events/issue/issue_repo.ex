@@ -8,5 +8,4 @@ defmodule OctoEvents.IssueRepo do
   def get_by_number(number) do
     Repo.get_by(Issue, number: number)
   end
-
 end
