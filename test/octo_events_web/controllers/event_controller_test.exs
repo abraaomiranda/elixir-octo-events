@@ -23,6 +23,21 @@ defmodule OctoEventsWeb.EventControllerTest do
       assert %{"status" => "ok", "data" => _} = json_response(conn, 201)
     end
 
+    test "returns 200 when receive ping request", %{conn: conn, path: path} do
+      params = %{
+        "payload" => %{
+          "action" => "open",
+          "issue" => string_params_for(:issue)
+        }
+      }
+
+      conn = conn
+        |> put_req_header("http_x_github_event", "ping")
+        |> post(path, params)
+
+      assert json_response(conn, 200)
+    end
+
     test "return 422 when params are invalid", %{conn: conn, path: path} do
       params = %{
         "payload" => %{
