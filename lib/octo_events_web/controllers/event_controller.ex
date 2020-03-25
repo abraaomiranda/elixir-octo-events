@@ -4,9 +4,10 @@ defmodule OctoEventsWeb.EventController do
   alias OctoEvents.CreateEvent
 
   def create(conn, %{"payload" => payload}) do
-    event_type = get_req_header(conn, "http_x_github_event")
+    event_type = get_req_header(conn, "x-github-event")
+    decoded_payload = Jason.decode!(payload)
 
-    case CreateEvent.run(event_type, payload) do
+    case CreateEvent.run(event_type, decoded_payload) do
       {:check, _} ->
         json(conn, "I'm alive")
 

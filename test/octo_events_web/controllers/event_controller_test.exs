@@ -1,8 +1,6 @@
 defmodule OctoEventsWeb.EventControllerTest do
   use OctoEventsWeb.ConnCase, async: true
 
-  import OctoEvents.Factory
-
   describe "create/2" do
     setup %{conn: conn} do
       %{conn: conn, path: "api/v1/events"}
@@ -10,15 +8,13 @@ defmodule OctoEventsWeb.EventControllerTest do
 
     test "returns 201 when issue_event is created successfully", %{conn: conn, path: path} do
       params = %{
-        "payload" => %{
-          "action" => "open",
-          "issue" => string_params_for(:issue)
-        }
+        "payload" =>
+          File.read!(Path.expand("../../support/fixtures/payload/issue_event.json", __DIR__))
       }
 
       conn =
         conn
-        |> put_req_header("http_x_github_event", "issue")
+        |> put_req_header("x-github-event", "issue")
         |> post(path, params)
 
       assert %{"status" => "ok", "data" => _} = json_response(conn, 201)
@@ -26,15 +22,13 @@ defmodule OctoEventsWeb.EventControllerTest do
 
     test "returns 200 when receive ping request", %{conn: conn, path: path} do
       params = %{
-        "payload" => %{
-          "action" => "open",
-          "issue" => string_params_for(:issue)
-        }
+        "payload" =>
+          File.read!(Path.expand("../../support/fixtures/payload/issue_event.json", __DIR__))
       }
 
       conn =
         conn
-        |> put_req_header("http_x_github_event", "ping")
+        |> put_req_header("x-github-event", "ping")
         |> post(path, params)
 
       assert json_response(conn, 200)
@@ -42,28 +36,26 @@ defmodule OctoEventsWeb.EventControllerTest do
 
     test "return 422 when params are invalid", %{conn: conn, path: path} do
       params = %{
-        "payload" => %{}
+        "payload" => Jason.encode!(%{wrong: :argumentss})
       }
 
       conn =
         conn
-        |> put_req_header("http_x_github_event", "issue")
+        |> put_req_header("x-github-event", "issue")
         |> post(path, params)
 
       assert %{"status" => "unprocessable entity"} = json_response(conn, 422)
     end
 
-    test "return 422 when when event type is not mapped", %{conn: conn, path: path} do
+    test "return 422 when event type is not mapped", %{conn: conn, path: path} do
       params = %{
-        "payload" => %{
-          "action" => "open",
-          "issue" => string_params_for(:issue)
-        }
+        "payload" =>
+          File.read!(Path.expand("../../support/fixtures/payload/issue_event.json", __DIR__))
       }
 
       conn =
         conn
-        |> put_req_header("http_x_github_event", "unexistent type")
+        |> put_req_header("x-github-event", "unexistent type")
         |> post(path, params)
 
       assert %{"status" => "unprocessable entity"} = json_response(conn, 422)
