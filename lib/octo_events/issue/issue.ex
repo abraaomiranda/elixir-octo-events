@@ -1,4 +1,8 @@
 defmodule OctoEvents.Issue do
+  @moduledoc """
+  Issue schema
+  """
+
   use Ecto.Schema
 
   schema "issues" do

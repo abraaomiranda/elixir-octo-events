@@ -1,8 +1,8 @@
 defmodule OctoEventsWeb.EventViewTest do
   use ExUnit.Case, async: true
 
-  alias OctoEventsWeb.EventView
   alias OctoEvents.Event
+  alias OctoEventsWeb.EventView
 
   describe "render/2 event.json" do
     test "returns ok and the event data" do

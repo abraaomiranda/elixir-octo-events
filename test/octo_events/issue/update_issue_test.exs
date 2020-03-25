@@ -1,7 +1,7 @@
 defmodule OctoEvents.UpdateIssueTest do
   use OctoEvents.DataCase, async: true
 
-  alias OctoEvents.{UpdateIssue, Issue}
+  alias OctoEvents.{Issue, UpdateIssue}
 
   import OctoEvents.Factory
 
