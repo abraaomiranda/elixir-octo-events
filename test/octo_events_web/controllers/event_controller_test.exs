@@ -14,7 +14,7 @@ defmodule OctoEventsWeb.EventControllerTest do
 
       conn =
         conn
-        |> put_req_header("x-github-event", "issue")
+        |> put_req_header("x-github-event", "issues")
         |> post(path, params)
 
       assert %{"status" => "ok", "data" => _} = json_response(conn, 201)
@@ -41,7 +41,7 @@ defmodule OctoEventsWeb.EventControllerTest do
 
       conn =
         conn
-        |> put_req_header("x-github-event", "issue")
+        |> put_req_header("x-github-event", "issues")
         |> post(path, params)
 
       assert %{"status" => "unprocessable entity"} = json_response(conn, 422)

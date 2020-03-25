@@ -3,7 +3,7 @@ defmodule OctoEvents.CreateEvent do
   Proxy module to create an specific type of event
   """
 
-  def run(["issue"], %{"action" => action, "issue" => issue_attributes}) do
+  def run(["issues"], %{"action" => action, "issue" => issue_attributes}) do
     OctoEvents.CreateIssueEvent.run(issue_attributes, %{action: action})
   end
 
