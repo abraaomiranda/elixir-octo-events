@@ -5,7 +5,9 @@ defmodule OctoEventsWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", OctoEventsWeb do
+  scope "/api/v1", OctoEventsWeb do
     pipe_through :api
+
+    resources("/events", EventController, only: [:create])
   end
 end
