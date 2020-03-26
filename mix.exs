@@ -42,6 +42,9 @@ defmodule OctoEvents.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
 
+      # authentication
+      {:basic_auth, "~> 2.2.2"},
+
       # Dev/test
       {:credo, "~> 1.2", only: [:dev, :test], runtime: false},
       {:ex_machina, "~> 2.3", only: :test}

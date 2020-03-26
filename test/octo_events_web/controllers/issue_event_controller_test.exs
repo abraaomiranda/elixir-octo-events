@@ -4,6 +4,12 @@ defmodule OctoEventsWeb.IssueEventControllerTest do
   import OctoEvents.Factory
 
   describe "index/2" do
+    setup %{conn: conn} do
+      conn = OctoEvents.BasicAuthHelper.using_basic_auth(conn)
+
+      %{conn: conn}
+    end
+
     test "returns 200 when found the issue", %{conn: conn} do
       issue = insert(:issue)
 
