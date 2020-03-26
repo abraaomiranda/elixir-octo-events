@@ -4,6 +4,12 @@ defmodule OctoEvents.Factory do
   """
   use ExMachina.Ecto, repo: OctoEvents.Repo
 
+  def event do
+    %OctoEvents.Event{
+      action: "open"
+    }
+  end
+
   def issue_factory do
     %OctoEvents.Issue{
       html_url: "https://github.com/octo_events/",

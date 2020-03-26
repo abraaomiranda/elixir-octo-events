@@ -3,6 +3,9 @@ defmodule OctoEvents.Event do
   Event schema
   """
 
+  # @michel ?
+  @derive {Jason.Encoder, only: [:action, :inserted_at]}
+
   use Ecto.Schema
 
   schema "abstract table: events" do

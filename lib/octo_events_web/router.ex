@@ -10,4 +10,10 @@ defmodule OctoEventsWeb.Router do
 
     resources("/events", EventController, only: [:create])
   end
+
+  scope "/api/v1", OctoEventsWeb do
+    pipe_through :api
+
+    resources("/issues/:number/events", IssueEventController, only: [:index])
+  end
 end

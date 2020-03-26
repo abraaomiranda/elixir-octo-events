@@ -4,10 +4,7 @@ defmodule OctoEventsWeb.EventView do
   def render("event.json", %{event: event}) do
     %{
       status: :ok,
-      data: %{
-        action: event.action,
-        inserted_at: event.inserted_at
-      }
+      data: event
     }
   end
 end

@@ -12,12 +12,6 @@ defmodule OctoEventsWeb.ApiFallbackController do
     |> json(%{status: "Unmapped event type"})
   end
 
-  def call(conn, {:error, %Ecto.Changeset{}}) do
-    conn
-    |> put_status(:unprocessable_entity)
-    |> json(%{status: "Unprocessable entity"})
-  end
-
   def call(conn, {:error, _}) do
     conn
     |> put_status(:unprocessable_entity)
