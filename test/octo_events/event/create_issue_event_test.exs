@@ -24,6 +24,16 @@ defmodule OctoEvents.CreateIssueEventTest do
       %{action: ["can't be blank"]} = errors_on(changeset)
     end
 
+    test "returns error when issue has no number" do
+      event_params = %{"action" => "open"}
+      issue_params = string_params_for(:issue, number: nil)
+
+      assert {:error, %Ecto.Changeset{} = changeset} =
+               CreateIssueEvent.run(issue_params, event_params)
+
+      %{number: ["can't be blank"]} = errors_on(changeset)
+    end
+
     test "returns error when cannot create issue" do
       event_params = %{"action" => "open"}
       issue_params = string_params_for(:issue, state: "")

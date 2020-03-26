@@ -34,4 +34,13 @@ defmodule OctoEvents.CreateIssueEvent do
         CreateIssue.run(issue_attributes)
     end
   end
+
+  defp create_or_update_issue(issue_attributes) do
+    changeset =
+      %Issue{}
+      |> cast(issue_attributes, [:number])
+      |> validate_required([:number])
+
+    {:error, changeset}
+  end
 end

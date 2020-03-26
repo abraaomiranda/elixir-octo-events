@@ -4,14 +4,18 @@ defmodule OctoEvents.CreateEvent do
   """
 
   def run(["issues"], %{"action" => action, "issue" => issue_attributes}) do
-    OctoEvents.CreateIssueEvent.run(issue_attributes, %{action: action})
+    OctoEvents.CreateIssueEvent.run(issue_attributes, %{"action" => action})
+  end
+
+  def run(["issues"], _) do
+    {:error, :unprocessable_entity}
   end
 
   def run(["ping"], _) do
-    {:check, "I am alive"}
+    {:check, :alive}
   end
 
   def run(_, _) do
-    {:error, "unprocessable entity"}
+    {:error, :unmapped}
   end
 end

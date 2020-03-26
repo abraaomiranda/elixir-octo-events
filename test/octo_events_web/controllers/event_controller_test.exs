@@ -36,7 +36,7 @@ defmodule OctoEventsWeb.EventControllerTest do
 
     test "return 422 when params are invalid", %{conn: conn, path: path} do
       params = %{
-        "payload" => Jason.encode!(%{wrong: :argumentss})
+        "payload" => Jason.encode!(%{})
       }
 
       conn =
@@ -44,7 +44,7 @@ defmodule OctoEventsWeb.EventControllerTest do
         |> put_req_header("x-github-event", "issues")
         |> post(path, params)
 
-      assert %{"status" => "unprocessable entity"} = json_response(conn, 422)
+      assert %{"status" => "Unprocessable entity"} = json_response(conn, 422)
     end
 
     test "return 422 when event type is not mapped", %{conn: conn, path: path} do
@@ -58,7 +58,7 @@ defmodule OctoEventsWeb.EventControllerTest do
         |> put_req_header("x-github-event", "unexistent type")
         |> post(path, params)
 
-      assert %{"status" => "unprocessable entity"} = json_response(conn, 422)
+      assert %{"status" => "Unmapped event type"} = json_response(conn, 422)
     end
   end
 end
